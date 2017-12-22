@@ -1,8 +1,10 @@
 import Foundation
+import ObjectMapper
 
-struct Post {
-    var id: String
-    var title: String
+class Post: Mappable{
+    
+    var id: String?
+    var title: String?
     var description: String?
     var likes: [User]?
     var saves: [User]?
@@ -10,14 +12,19 @@ struct Post {
     var poster: User?
     var picture: Image?
     
-    init(id: String, title: String, description: String, likes: [User], saves: [User]){
-        self.id = id
-        self.title = title
-        self.description = description
-        self.likes = likes
-        self.saves = saves
+    
+    required init?(map: Map) {
+        
     }
     
-    
-    
+    func mapping(map: Map) {
+        id <- map["_id"]
+        title <- map["title"]
+        description <- map["description"]
+        likes <- map["likes"]
+        saves <- map["saves"]
+        poster <- map["poster"]
+    }
+
+
 }

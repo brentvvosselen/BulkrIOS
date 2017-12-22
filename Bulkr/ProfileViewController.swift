@@ -6,7 +6,7 @@ class ProfileViewController: UIViewController{
     var posts: [Post] = []
     
     override func viewDidLoad() {
-        PostService.test(succes: {(response) -> Void in
+        PostService.getMyProjects(completion: {(response) -> Void in
             self.setPosts(response)
             print("after set")
             self.postsTableView.dataSource = self
@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController{
     
     func setPosts(_ posts: [Post]){
         self.posts = posts
-        print("set products")
+        print(posts[0].poster!.email)
         
     }
 }

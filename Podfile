@@ -6,7 +6,8 @@ target 'Bulkr' do
   use_frameworks!
 
   # Pods for Bulkr
-	pod 'Alamofire', '~> 4.5'	
+	pod 'Alamofire', '~> 4.5'
+	pod 'AlamofireObjectMapper', '~> 5.0'	
 
   target 'BulkrUITests' do
     inherit! :search_paths

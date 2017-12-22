@@ -15,6 +15,9 @@
 		6C45E62F1FEC30820064A2F0 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45E62E1FEC30820064A2F0 /* Image.swift */; };
 		6C45E6311FEC39D60064A2F0 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45E6301FEC39D60064A2F0 /* ProfileViewController.swift */; };
 		6C45E6341FEC3E210064A2F0 /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45E6331FEC3E210064A2F0 /* PostCell.swift */; };
+		6C4AB8EC1FED21CF000A5708 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C4AB8EF1FED21CF000A5708 /* Alamofire.framework */; };
+		6C4AB8ED1FED21CF000A5708 /* AlamofireObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C4AB8F01FED21CF000A5708 /* AlamofireObjectMapper.framework */; };
+		6C4AB8EE1FED21CF000A5708 /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C4AB8F11FED21CF000A5708 /* ObjectMapper.framework */; };
 		6C4DE30C1FEBD3EE00B6D786 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4DE30B1FEBD3EE00B6D786 /* AppDelegate.swift */; };
 		6C4DE30E1FEBD3EE00B6D786 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4DE30D1FEBD3EE00B6D786 /* FirstViewController.swift */; };
 		6C4DE3101FEBD3EE00B6D786 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4DE30F1FEBD3EE00B6D786 /* SecondViewController.swift */; };
@@ -42,6 +45,9 @@
 		6C45E62E1FEC30820064A2F0 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		6C45E6301FEC39D60064A2F0 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6C45E6331FEC3E210064A2F0 /* PostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
+		6C4AB8EF1FED21CF000A5708 /* Alamofire.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Alamofire.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C4AB8F01FED21CF000A5708 /* AlamofireObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AlamofireObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6C4AB8F11FED21CF000A5708 /* ObjectMapper.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ObjectMapper.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C4DE3081FEBD3EE00B6D786 /* Bulkr.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bulkr.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C4DE30B1FEBD3EE00B6D786 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6C4DE30D1FEBD3EE00B6D786 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -65,6 +71,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C4AB8EC1FED21CF000A5708 /* Alamofire.framework in Frameworks */,
+				6C4AB8ED1FED21CF000A5708 /* AlamofireObjectMapper.framework in Frameworks */,
+				6C4AB8EE1FED21CF000A5708 /* ObjectMapper.framework in Frameworks */,
 				4EA8B7A73D872B0525CC48A9 /* Pods_Bulkr.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -156,6 +165,9 @@
 		7716BA0CCD5BB01593254741 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C4AB8EF1FED21CF000A5708 /* Alamofire.framework */,
+				6C4AB8F01FED21CF000A5708 /* AlamofireObjectMapper.framework */,
+				6C4AB8F11FED21CF000A5708 /* ObjectMapper.framework */,
 				99275DD0B755752DEEAB526C /* Pods_Bulkr.framework */,
 				B3D9D608BD173EF0503D4707 /* Pods_BulkrUITests.framework */,
 			);
@@ -322,10 +334,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Bulkr/Pods-Bulkr-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
