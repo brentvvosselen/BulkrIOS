@@ -4,32 +4,6 @@ import ObjectMapper
 enum PostService{
     
     
-    /*static func test(succes: @escaping (_ posts: [Post]) -> Void){
-        Alamofire.request("http://127.0.0.1:3000/api/recipe/getAll/brent.vanvosselen@live.be").responseJSON {
-            response in
-            
-            var posts: [Post] = []
-            
-            if let json = response.result.value {
-                for item in json as! [Dictionary<String, Any>] {
-                    posts.append(Post(id: item["_id"] as! String,
-                                      title: item["title"] as! String,
-                                      description: item["description"] as! String,
-                                      likes: item["likes"] as! [User],
-                                      saves: item["saves"] as! [User]))
-                                      //createdAt: DateFormatter().date(from: item["createdAt"] as? String)!))
-                                      //poster: item["poster"] as! User))
-                }
-            }
-            
-            print(posts)
-            print("test")
-            succes(posts)
-           
-            
-            
-        }
-    }*/
     
     static func getMyProjects(completion: @escaping (_ posts: [Post]) -> Void){
         Alamofire.request("http://127.0.0.1:3000/api/recipe/getAll/brent.vanvosselen@live.be").validate(statusCode: 200..<300).responseJSON {
@@ -51,7 +25,26 @@ enum PostService{
                 return
             }
         }
+    }
     
-}
+    static func addPost(_ post: Post, completion: @escaping (_ message: String) -> Void){
+        let params = [
+            "title": post.title,
+            "description": post.description
+        ]
+        let user = "brent.vanvosselen@live.be"
+        Alamofire.request("http://127.0.0.1:3000/api/recipe/add/" + user, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                print("succes")
+                completion("succes")
+            case .failure(let error):
+                return
+            }
+        
+ 
+        }
+    }
 
 }

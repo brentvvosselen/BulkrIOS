@@ -17,6 +17,11 @@ class Post: Mappable{
         
     }
     
+    init(title: String, description: String?){
+        self.title = title
+        self.description = description
+    }
+    
     func mapping(map: Map) {
         id <- map["_id"]
         title <- map["title"]
