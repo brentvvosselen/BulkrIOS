@@ -28,6 +28,28 @@ class PostService{
         }
     }
     
+    static func getMySaves(completion: @escaping (_ posts: [Post]) -> Void) {
+        let user: String = "brent.vanvosselen@live.be"
+        Alamofire.request(prefix + "api/recipes/saved/" + user).validate(statusCode: 200..<300).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+            guard let responseJSON = response.result.value as? Array<[String: AnyObject]> else {
+                //failure completion
+                return
+            }
+            guard let posts: [Post] = Mapper<Post>().mapArray(JSONArray: responseJSON) else {
+                //set failure completion
+                return
+            }
+            completion(posts)
+            case .failure(let error):
+                //set failure
+                return
+            }
+        }
+    }
+    
     static func getMyFeed(at page: Int, completion: @escaping (_ posts: [Post]) -> Void){
         let email: String = "brent.vanvosselen@live.be"
         Alamofire.request(prefix + "api/feed/" + email + "/" + String(page)).validate(statusCode: 200..<300).responseJSON {

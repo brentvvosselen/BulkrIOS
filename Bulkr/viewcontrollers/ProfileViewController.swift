@@ -1,7 +1,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController{
-    @IBOutlet weak var postsCollectionView: UICollectionView!
+    
+    @IBOutlet weak var postsTableView: UITableView!
     
     var refreshControl: UIRefreshControl!
     
@@ -11,15 +12,14 @@ class ProfileViewController: UIViewController{
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         PostService.getMyProjects(completion: {(response) -> Void in
             self.setPosts(response)
-            self.postsCollectionView.dataSource = self
-            self.postsCollectionView.reloadData()
+            self.postsTableView.reloadData()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         })
         
         refreshControl = UIRefreshControl()
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
         refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
-        postsCollectionView.refreshControl = refreshControl
+        postsTableView.refreshControl = refreshControl
         
         
     }
@@ -33,32 +33,26 @@ class ProfileViewController: UIViewController{
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         PostService.getMyProjects(completion: {(response) -> Void in
             self.setPosts(response)
-            self.postsCollectionView.reloadData()
+            self.postsTableView.reloadData()
             refreshControl.endRefreshing()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
         })
     }
 }
 
-extension ProfileViewController: UICollectionViewDataSource {
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+extension ProfileViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "profilePostCell", for: indexPath) as! PostCell
-        cell.post = posts[indexPath.item]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "profilePostCell", for: indexPath) as! PostTableCell
+        cell.post = posts[indexPath.row]
         return cell
     }
 }
 
-/*extension ProfileViewController: UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cellWidth = (collectionView.frame.width - CGFloat(8))
-        return CGSize(width: cellWidth, height: 150)
-    }
-}*/

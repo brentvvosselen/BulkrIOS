@@ -55,12 +55,13 @@ class PostTableCell: UITableViewCell {
                 if user.email == currentUser {
                     saved = true
                     saveButton.setTitle("SAVED", for: .normal)
+                    saveButton.isEnabled = false
                 }
             }
         }
     }
     @IBAction func bulk(_ sender: Any) {
-        print("bulk")
+        print("bulk_click")
         if !liked {
             //like
             PostService.likePost(post.id!, completion: {(response) -> Void in
@@ -77,11 +78,13 @@ class PostTableCell: UITableViewCell {
         }
     }
     @IBAction func save(_ sender: Any) {
+        print("save_click")
         if !saved {
             //save
             PostService.savePost(post.id!, completion: {(response) -> Void in
                 self.saved = true
                 self.saveButton.setTitle("SAVED", for: .normal)
+                self.saveButton.isEnabled = false
             })
             
         }
