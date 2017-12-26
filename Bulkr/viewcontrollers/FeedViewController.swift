@@ -4,12 +4,17 @@ class FeedViewController: UIViewController {
     @IBOutlet weak var postTableView: UITableView!
     
     var posts: [Post] = []
+    var page = 0
+    var hasmoreposts = true
     
     override func viewDidLoad() {
         print("hello")
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        PostService.getMyFeed(at: 0, completion: {(response) -> Void in
+        PostService.getMyFeed(at: page, completion: {(response) -> Void in
             self.addPosts(response)
+            if response.count < 5 {
+                self.hasmoreposts = false
+            }
             /*self.postCollectionView.dataSource = self
             self.postCollectionView.delegate = self*/
             self.postTableView.reloadData()
@@ -55,6 +60,33 @@ extension FeedViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "postTableCell",for: indexPath) as! PostTableCell
         cell.post = posts[indexPath.row]
         return cell
+    }
+    
+   
+}
+
+extension FeedViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == posts.count {
+            if hasmoreposts {
+                print("new posts")
+                UIApplication.shared.isNetworkActivityIndicatorVisible = true
+                page += 1
+                PostService.getMyFeed(at: page, completion: {(response) -> Void in
+                    self.addPosts(response)
+                    if response.count < 5 {
+                        self.hasmoreposts = false
+                    }
+                    /*self.postCollectionView.dataSource = self
+                     self.postCollectionView.delegate = self*/
+                    self.postTableView.reloadData()
+                    
+                    print(self.posts)
+                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                })
+            }
+            
+        }
     }
 }
 

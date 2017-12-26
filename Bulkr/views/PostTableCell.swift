@@ -13,11 +13,14 @@ class PostTableCell: UITableViewCell {
     var saved: Bool = false
     var liked: Bool = false
     
+    var currentUser: String = "brent.vanvosselen@live.be"
+    
     var post: Post!{
         didSet{
             titleLabel.text = post.title
             posterLabel.text = post.poster?.email
             descriptionLabel.text = post.description
+            
             
             //profile picture of poster
             if let picture = post.poster?.picture{
@@ -39,14 +42,49 @@ class PostTableCell: UITableViewCell {
             posterPicture.layer.cornerRadius = 25
             posterPicture.layer.masksToBounds = true
             
-            //
+            //check if liked
+            for user in post.likes! {
+                if user.email == currentUser {
+                    liked = true
+                    bulkButton.setTitle("UNBULK", for: .normal)
+                }
+            }
+            
+            //check if saved
+            for user in post.saves! {
+                if user.email == currentUser {
+                    saved = true
+                    saveButton.setTitle("SAVED", for: .normal)
+                }
+            }
         }
     }
     @IBAction func bulk(_ sender: Any) {
         print("bulk")
+        if !liked {
+            //like
+            PostService.likePost(post.id!, completion: {(response) -> Void in
+                self.liked = true
+                self.bulkButton.setTitle("UNBULK", for: .normal)
+            })
+            
+        }else{
+            //unlike
+            PostService.unlikePost(post.id!, completion: {(response) -> Void in
+                self.liked = false
+                self.bulkButton.setTitle("BULK", for: .normal)
+            })
+        }
     }
     @IBAction func save(_ sender: Any) {
-        print("save")
+        if !saved {
+            //save
+            PostService.savePost(post.id!, completion: {(response) -> Void in
+                self.saved = true
+                self.saveButton.setTitle("SAVED", for: .normal)
+            })
+            
+        }
     }
     
 }

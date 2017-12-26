@@ -1,12 +1,13 @@
 import Alamofire
 import ObjectMapper
 
-enum PostService{
+class PostService{
     
-    
+    static let prefix: String = "http://127.0.0.1:3000/"
     
     static func getMyProjects(completion: @escaping (_ posts: [Post]) -> Void){
-        Alamofire.request("http://127.0.0.1:3000/api/recipe/getAll/brent.vanvosselen@live.be").validate(statusCode: 200..<300).responseJSON {
+        let user: String = "brent.vanvosselen@live.be"
+        Alamofire.request(prefix + "api/recipe/getAll/" + user).validate(statusCode: 200..<300).responseJSON {
             response in
             switch response.result {
             case .success:
@@ -29,7 +30,7 @@ enum PostService{
     
     static func getMyFeed(at page: Int, completion: @escaping (_ posts: [Post]) -> Void){
         let email: String = "brent.vanvosselen@live.be"
-        Alamofire.request("http://127.0.0.1:3000/api/feed/" + email + "/" + String(page)).validate(statusCode: 200..<300).responseJSON {
+        Alamofire.request(prefix + "api/feed/" + email + "/" + String(page)).validate(statusCode: 200..<300).responseJSON {
             response in
             switch response.result {
             case .success:
@@ -56,7 +57,7 @@ enum PostService{
             "description": post.description
         ]
         let user = "brent.vanvosselen@live.be"
-        Alamofire.request("http://127.0.0.1:3000/api/recipe/add/" + user, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON {
+        Alamofire.request(prefix + "api/recipe/add/" + user, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON {
             response in
             switch response.result {
             case .success:
@@ -69,5 +70,54 @@ enum PostService{
  
         }
     }
-
+    
+    static func likePost(_ id: String, completion: @escaping (_ message: String) -> Void) {
+        let params = [
+            "recipeid": id
+        ]
+        let user = "brent.vanvosselen@live.be"
+        Alamofire.request(prefix + "api/recipes/like/" + user, method: .put, parameters: params, encoding: JSONEncoding.default).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                completion("succes")
+            case .failure(let error):
+                return
+            }
+        }
+    }
+    
+    static func unlikePost(_ id: String, completion: @escaping(_ message: String) -> Void) {
+        let params = [
+            "recipeid": id
+        ]
+        let user = "brent.vanvosselen@live.be"
+        Alamofire.request(prefix + "api/recipes/unlike/" + user, method: .put, parameters: params, encoding: JSONEncoding.default).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                completion("succes")
+            case .failure(let error):
+                return
+            }
+        }
+    }
+    
+    static func savePost(_ id: String, completion: @escaping(_ message: String) -> Void) {
+        let params = [
+            "recipeid": id
+        ]
+        let user = "brent.vanvosselen@live.be"
+        Alamofire.request(prefix + "api/recipe/save/" + user, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                completion("succes")
+            case .failure(let error):
+                return
+            }
+        }
+    }
+    
 }
+
