@@ -29,6 +29,7 @@ class Post: Mappable{
         likes <- map["likes"]
         saves <- map["saves"]
         poster <- map["poster"]
+        picture <- map["picture"]
     }
 
 
