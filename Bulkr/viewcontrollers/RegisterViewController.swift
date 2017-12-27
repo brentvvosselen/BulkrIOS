@@ -24,6 +24,7 @@ class RegisterViewController: UIViewController {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
                 UserService.register(with: email, and: password, completion: {(response) -> Void in
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                    self.dismiss(animated: true)
                 })
             } else {
                 print("not a valid email")

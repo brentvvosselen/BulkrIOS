@@ -203,7 +203,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aSQ-c9-Msj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1777" y="-761"/>
+            <point key="canvasLocation" x="1592" y="-762"/>
         </scene>
         <!--Saves-->
         <scene sceneID="FKr-Oa-38z">
@@ -526,7 +526,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ic4-kJ-3kH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="809" y="834"/>
+            <point key="canvasLocation" x="806" y="831"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="cRJ-oj-YgB">
@@ -565,7 +565,7 @@
                                 <textInputTraits key="textInputTraits" textContentType="email"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9zq-ye-KFb">
-                                <rect key="frame" x="164.5" y="113" width="72" height="33"/>
+                                <rect key="frame" x="164.5" y="113.5" width="72" height="33"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                 <state key="normal" title="SIGN UP.">
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -646,11 +646,12 @@
                         <outlet property="emailTextField" destination="55N-SX-Kk1" id="O7m-hX-BSn"/>
                         <outlet property="enterButton" destination="keE-eX-zz7" id="f33-EQ-idO"/>
                         <outlet property="passwordTextField" destination="21b-dK-dFz" id="urz-pA-Wdr"/>
+                        <segue destination="49e-Tb-3d3" kind="show" identifier="loggedInSegue" id="2bX-3o-lry"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Loy-Jb-gwy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="804" y="1621.4392803598203"/>
+            <point key="canvasLocation" x="-1089" y="794"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="Dj7-Z3-qT9">
@@ -805,7 +806,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mmS-h1-NWi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1643" y="1626"/>
+            <point key="canvasLocation" x="-1089" y="1597"/>
         </scene>
         <!--Profile-->
         <scene sceneID="g4u-H0-WCy">
@@ -957,14 +958,22 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="alX-Ug-PK2"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Profile" id="ZCQ-0y-nHq"/>
+                    <navigationItem key="navigationItem" title="Profile" id="ZCQ-0y-nHq">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="iPV-rH-0xh">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <segue destination="iae-si-FyK" kind="unwind" identifier="didLogout" unwindAction="unwindFromLogout:" id="KbY-eg-bKG"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="postsTableView" destination="sD8-HX-fXE" id="5BC-eE-sbe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5sK-jc-86A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="iae-si-FyK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1709.5999999999999" y="834.33283358320841"/>
+            <point key="canvasLocation" x="1592" y="831"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
