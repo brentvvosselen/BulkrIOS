@@ -7,6 +7,7 @@ class User: Mappable {
     var saves: [Post]?
     var posts: [Post]?
     var picture: Image?
+    var followers: Int?
     
     required init?(map: Map) {
     
@@ -18,5 +19,6 @@ class User: Mappable {
         saves <- map["saves"]
         posts <- map["posts"]
         picture <- map["picture"]
+        followers <- map["followers"]
     }
 }

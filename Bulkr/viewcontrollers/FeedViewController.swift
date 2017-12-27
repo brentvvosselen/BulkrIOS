@@ -6,6 +6,8 @@ class FeedViewController: UIViewController {
     var posts: [Post] = []
     var page = 0
     var hasmoreposts = true
+    //white statusbar
+
     
     override func viewDidLoad() {
         print("hello")

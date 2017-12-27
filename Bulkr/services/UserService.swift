@@ -55,5 +55,28 @@ class UserService {
         }
     }
     
+    static func getUserInfo(completion: @escaping(_ user: User) -> Void) {
+        let email = "brent.vanvosselen@live.be"
+        Alamofire.request(prefix + "api/user/" + email, method: .get).validate(statusCode: 200..<300).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                //get return value
+                guard let responseJSON = response.result.value as? [String: AnyObject] else {
+                    //set failure
+                    return
+                }
+                guard let user: User = Mapper<User>().map(JSON: responseJSON) else {
+                    //set failure completion
+                    return
+                }
+                completion(user)
+            case .failure(let error):
+                //set failure
+                return
+            }
+        }
+    }
+    
     
 }
