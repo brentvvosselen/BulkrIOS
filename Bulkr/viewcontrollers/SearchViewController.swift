@@ -7,6 +7,17 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var foundUsersTable: UITableView!
     
     var foundUsers: [User] = []
+    private var selectedIndex: Int?
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case "showProfile"?:
+            let otherProfileViewController = segue.destination as! OtherProfileViewController
+            otherProfileViewController.user = foundUsers[foundUsersTable.indexPathForSelectedRow!.row]
+        default:
+            fatalError("Unknown segue")
+        }
+    }
 }
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -34,5 +45,12 @@ extension SearchViewController: UITableViewDataSource {
         cell.user = foundUsers[indexPath.row]
         return cell
         
+    }
+}
+
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.selectedIndex = indexPath.row
+        print(indexPath)
     }
 }

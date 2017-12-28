@@ -55,8 +55,7 @@ class UserService {
         }
     }
     
-    static func getUserInfo(completion: @escaping(_ user: User) -> Void) {
-        let email = "brent.vanvosselen@live.be"
+    static func getUserInfo(for email: String, completion: @escaping(_ user: User) -> Void) {
         Alamofire.request(prefix + "api/user/" + email, method: .get).validate(statusCode: 200..<300).responseJSON {
             response in
             switch response.result {

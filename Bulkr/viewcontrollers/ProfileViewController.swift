@@ -19,7 +19,7 @@ class ProfileViewController: UIViewController{
         
         //get user data
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        UserService.getUserInfo(completion: {(response) -> Void in
+        UserService.getUserInfo(for: "brent.vanvosselen@live.be", completion: {(response) -> Void in
             self.setPosts(response.posts!)
             self.emailLabel.text = response.email
             self.followersLabel.text = String(describing: response.followers!) + " Followers"
@@ -52,7 +52,7 @@ class ProfileViewController: UIViewController{
     
     @objc func refresh(refreshControl: UIRefreshControl){
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        UserService.getUserInfo(completion: {(response) -> Void in
+        UserService.getUserInfo(for: "brent.vanvosselen@live.be", completion: {(response) -> Void in
             self.setPosts(response.posts!)
             self.emailLabel.text = response.email
             self.followersLabel.text = String(describing: response.followers!) + " Followers"

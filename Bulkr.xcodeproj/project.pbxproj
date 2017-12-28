@@ -17,6 +17,7 @@
 		6C2FAC441FF268D7004F8ABD /* PostTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2FAC431FF268D7004F8ABD /* PostTableCell.swift */; };
 		6C2FAC461FF27B66004F8ABD /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C2FAC451FF27B66004F8ABD /* CardView.swift */; };
 		6C36B4D71FF50F7B00FF4ED2 /* SearchUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C36B4D61FF50F7B00FF4ED2 /* SearchUserCell.swift */; };
+		6C36B4D91FF5324000FF4ED2 /* OtherProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C36B4D81FF5324000FF4ED2 /* OtherProfileViewController.swift */; };
 		6C452A221FF468B200C474C3 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C452A211FF468B200C474C3 /* SearchViewController.swift */; };
 		6C45E6271FEC04300064A2F0 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45E6261FEC04300064A2F0 /* PostService.swift */; };
 		6C45E62B1FEC06790064A2F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C45E62A1FEC06790064A2F0 /* User.swift */; };
@@ -56,6 +57,7 @@
 		6C2FAC431FF268D7004F8ABD /* PostTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableCell.swift; sourceTree = "<group>"; };
 		6C2FAC451FF27B66004F8ABD /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		6C36B4D61FF50F7B00FF4ED2 /* SearchUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUserCell.swift; sourceTree = "<group>"; };
+		6C36B4D81FF5324000FF4ED2 /* OtherProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileViewController.swift; sourceTree = "<group>"; };
 		6C452A211FF468B200C474C3 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		6C45E6261FEC04300064A2F0 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		6C45E62A1FEC06790064A2F0 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 				6C140F4D1FF3E17800EBBADE /* LoginViewController.swift */,
 				6C140F4F1FF4106200EBBADE /* RegisterViewController.swift */,
 				6C452A211FF468B200C474C3 /* SearchViewController.swift */,
+				6C36B4D81FF5324000FF4ED2 /* OtherProfileViewController.swift */,
 			);
 			path = viewcontrollers;
 			sourceTree = "<group>";
@@ -449,6 +452,7 @@
 				6C452A221FF468B200C474C3 /* SearchViewController.swift in Sources */,
 				6C140F531FF4191900EBBADE /* TextFieldExtension.swift in Sources */,
 				6C45E62D1FEC0B210064A2F0 /* Post.swift in Sources */,
+				6C36B4D91FF5324000FF4ED2 /* OtherProfileViewController.swift in Sources */,
 				6C45E6341FEC3E210064A2F0 /* PostCell.swift in Sources */,
 				6C534B831FF3051100E90522 /* SavesViewController.swift in Sources */,
 				6C2FAC461FF27B66004F8ABD /* CardView.swift in Sources */,
