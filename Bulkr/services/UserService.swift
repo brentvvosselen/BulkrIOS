@@ -78,5 +78,27 @@ class UserService {
         }
     }
     
+    static func findUsers(searchString: String, completion: @escaping(_ users: [User]) -> Void) {
+        Alamofire.request(prefix + "api/user/find/" + searchString, method: .get).validate(statusCode:200..<300).responseJSON {
+            response in
+            switch response.result {
+            case .success:
+                //get return value
+                guard let responseJSON = response.result.value as? Array<[String: AnyObject]> else {
+                    //failure completion
+                    return
+                }
+                guard let users: [User] = Mapper<User>().mapArray(JSONArray: responseJSON) else {
+                    //set failure completion
+                    return
+                }
+                completion(users)
+            case .failure(let error):
+                //set failure
+                return
+            }
+        }
+    }
+    
     
 }
