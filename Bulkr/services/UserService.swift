@@ -19,7 +19,7 @@ class UserService {
                     let token = json["token"] as! String
                     
                     UserDefaults.standard.setValue(token, forKey: "token")
-                    UserDefaults.standard.setValue(email, forKey:"userMail")
+                    UserDefaults.standard.setValue(email, forKey: "userMail")
                     UserDefaults.standard.synchronize()
                 }
                 completion(true)
@@ -96,6 +96,62 @@ class UserService {
                 //set failure
                 return
             }
+        }
+    }
+    
+    static func doesFollow(usermail: String, completion: @escaping(_ follows: Bool) -> Void) {
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/user/" + user + "/doesFollow/" + usermail, method: .get).validate(statusCode: 200..<300).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    if let JSON = response.result.value {
+                        print((JSON as? Bool))
+                        completion(JSON as! Bool)
+                    }else {
+                        //error
+                    }
+                case .failure(let error):
+                    //set failure
+                    return
+                }
+            }
+        } else {
+            return
+        }
+    }
+    
+    static func follow(usermail: String, completion: @escaping(_ boolean: Bool) -> Void) {
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/user/" + user + "/follow/" + usermail, method: .post).validate(statusCode: 200..<300).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    completion(true)
+                case .failure(let error):
+                    //error
+                    return
+                }
+            }
+        } else {
+            return
+        }
+    }
+    
+    static func unfollow(usermail: String, completion: @escaping(_ boolean: Bool) -> Void) {
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/user/" + user + "/unfollow/" + usermail, method: .put).validate(statusCode: 200..<300).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    completion(true)
+                case .failure(let error):
+                    //error
+                    return
+                }
+            }
+        } else {
+            return
         }
     }
     

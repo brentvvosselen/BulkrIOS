@@ -29,35 +29,13 @@ class PostService{
     }
     
     static func getMySaves(completion: @escaping (_ posts: [Post]) -> Void) {
-        let user: String = "brent.vanvosselen@live.be"
-        Alamofire.request(prefix + "api/recipes/saved/" + user).validate(statusCode: 200..<300).responseJSON {
-            response in
-            switch response.result {
-            case .success:
-            guard let responseJSON = response.result.value as? Array<[String: AnyObject]> else {
-                //failure completion
-                return
-            }
-            guard let posts: [Post] = Mapper<Post>().mapArray(JSONArray: responseJSON) else {
-                //set failure completion
-                return
-            }
-            completion(posts)
-            case .failure(let error):
-                //set failure
-                return
-            }
-        }
-    }
-    
-    static func getMyFeed(at page: Int, completion: @escaping (_ posts: [Post]) -> Void){
-        let email: String = "brent.vanvosselen@live.be"
-        Alamofire.request(prefix + "api/feed/" + email + "/" + String(page)).validate(statusCode: 200..<300).responseJSON {
-            response in
-            switch response.result {
-            case .success:
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/recipes/saved/" + user).validate(statusCode: 200..<300).responseJSON {
+                response in
+                switch response.result {
+                case .success:
                 guard let responseJSON = response.result.value as? Array<[String: AnyObject]> else {
-                    //set failure completion
+                    //failure completion
                     return
                 }
                 guard let posts: [Post] = Mapper<Post>().mapArray(JSONArray: responseJSON) else {
@@ -65,11 +43,38 @@ class PostService{
                     return
                 }
                 completion(posts)
-            case .failure(let error):
-                //set failure completion
-            return
+                case .failure(let error):
+                    //set failure
+                    return
+                }
             }
-            
+        } else {
+            return
+        }
+    }
+    
+    static func getMyFeed(at page: Int, completion: @escaping (_ posts: [Post]) -> Void){
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/feed/" + user + "/" + String(page)).validate(statusCode: 200..<300).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    guard let responseJSON = response.result.value as? Array<[String: AnyObject]> else {
+                        //set failure completion
+                        return
+                    }
+                    guard let posts: [Post] = Mapper<Post>().mapArray(JSONArray: responseJSON) else {
+                        //set failure completion
+                        return
+                    }
+                    completion(posts)
+                case .failure(let error):
+                    //set failure completion
+                return
+                }
+            }
+        } else {
+            return
         }
     }
     
@@ -78,18 +83,19 @@ class PostService{
             "title": post.title,
             "description": post.description
         ]
-        let user = "brent.vanvosselen@live.be"
-        Alamofire.request(prefix + "api/recipe/add/" + user, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON {
-            response in
-            switch response.result {
-            case .success:
-                print("succes")
-                completion("succes")
-            case .failure(let error):
-                return
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/recipe/add/" + user, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    print("succes")
+                    completion("succes")
+                case .failure(let error):
+                    return
+                }
             }
-        
- 
+        } else {
+            return
         }
     }
     
@@ -97,15 +103,18 @@ class PostService{
         let params = [
             "recipeid": id
         ]
-        let user = "brent.vanvosselen@live.be"
-        Alamofire.request(prefix + "api/recipes/like/" + user, method: .put, parameters: params, encoding: JSONEncoding.default).responseJSON {
-            response in
-            switch response.result {
-            case .success:
-                completion("succes")
-            case .failure(let error):
-                return
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/recipes/like/" + user, method: .put, parameters: params, encoding: JSONEncoding.default).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    completion("succes")
+                case .failure(let error):
+                    return
+                }
             }
+        } else {
+            return
         }
     }
     
@@ -113,15 +122,18 @@ class PostService{
         let params = [
             "recipeid": id
         ]
-        let user = "brent.vanvosselen@live.be"
-        Alamofire.request(prefix + "api/recipes/unlike/" + user, method: .put, parameters: params, encoding: JSONEncoding.default).responseJSON {
-            response in
-            switch response.result {
-            case .success:
-                completion("succes")
-            case .failure(let error):
-                return
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/recipes/unlike/" + user, method: .put, parameters: params, encoding: JSONEncoding.default).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    completion("succes")
+                case .failure(let error):
+                    return
+                }
             }
+        } else {
+            return
         }
     }
     
@@ -129,15 +141,18 @@ class PostService{
         let params = [
             "recipeid": id
         ]
-        let user = "brent.vanvosselen@live.be"
-        Alamofire.request(prefix + "api/recipe/save/" + user, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON {
-            response in
-            switch response.result {
-            case .success:
-                completion("succes")
-            case .failure(let error):
-                return
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            Alamofire.request(prefix + "api/recipe/save/" + user, method: .post, parameters: params, encoding: JSONEncoding.default).responseJSON {
+                response in
+                switch response.result {
+                case .success:
+                    completion("succes")
+                case .failure(let error):
+                    return
+                }
             }
+        } else {
+            return
         }
     }
     

@@ -31,8 +31,11 @@ class LoginViewController: UIViewController {
     
     func isLoggedIn() -> Bool {
         if let token = UserDefaults.standard.string(forKey: "token"){
-            print("token")
-            return true
+            if let user = UserDefaults.standard.string(forKey: "userMail") {
+                return true
+            } else {
+                return false
+            }
         }else{
             print("no token")
             return false
@@ -43,6 +46,7 @@ class LoginViewController: UIViewController {
         switch segue.identifier {
         case "didLogout"?:
             UserDefaults.standard.removeObject(forKey: "token")
+            UserDefaults.standard.removeObject(forKey: "userMail")
         default:
             fatalError("Unknown segue")
             
