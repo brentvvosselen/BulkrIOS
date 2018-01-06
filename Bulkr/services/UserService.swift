@@ -3,7 +3,7 @@ import ObjectMapper
 
 class UserService {
     
-    static let prefix: String = "http://127.0.0.1:3000/"
+    static let prefix: String = "https://bulkr-server.herokuapp.com/"
     
     static func login(as email: String, with password: String, completion: @escaping (_ boolean: Bool) -> Void, failure: @escaping(_ error: String) -> Void) {
         let params = [

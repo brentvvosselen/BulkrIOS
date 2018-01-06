@@ -28,7 +28,10 @@ class PostTableCell: UITableViewCell {
             dateFormatter.timeStyle = .medium
             
             dateFormatter.locale = Locale(identifier: "en_US")
-            dateLabel.text = dateFormatter.string(from: post.createdAt!)
+            if let date = post.createdAt {
+                dateLabel.text = dateFormatter.string(from: date)
+                
+            }
             
             if let like = post.likes{
                 likes = like.count
@@ -57,21 +60,27 @@ class PostTableCell: UITableViewCell {
             posterPicture.layer.masksToBounds = true
             
             //check if liked
-            for user in post.likes! {
-                if user.email == currentUser {
-                    liked = true
-                    bulkButton.setTitle("\(likes) UNBULK" , for: .normal)
+            if let likes = post.likes {
+                for user in likes {
+                    if user.email == currentUser {
+                        liked = true
+                        bulkButton.setTitle("\(likes) UNBULK" , for: .normal)
+                    }
                 }
             }
             
+            
             //check if saved
-            for user in post.saves! {
-                if user.email == currentUser {
-                    saved = true
-                    saveButton.setTitle("SAVED", for: .normal)
-                    saveButton.isEnabled = false
+            if let saves = post.saves {
+                for user in saves {
+                    if user.email == currentUser {
+                        saved = true
+                        saveButton.setTitle("SAVED", for: .normal)
+                        saveButton.isEnabled = false
+                    }
                 }
             }
+           
         }
     }
     @IBAction func bulk(_ sender: Any) {

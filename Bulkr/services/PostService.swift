@@ -3,7 +3,7 @@ import ObjectMapper
 
 class PostService{
     
-    static let prefix: String = "http://127.0.0.1:3000/"
+    static let prefix: String = "https://bulkr-server.herokuapp.com/"
     
     static func getMySaves(completion: @escaping (_ posts: [Post]) -> Void, failure: @escaping(_ error: String) -> Void) {
         let headers: HTTPHeaders = [
