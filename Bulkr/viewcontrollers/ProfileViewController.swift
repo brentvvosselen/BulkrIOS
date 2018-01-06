@@ -1,4 +1,5 @@
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class ProfileViewController: UIViewController{
     
@@ -34,6 +35,10 @@ class ProfileViewController: UIViewController{
                 }
                 self.postsTableView.reloadData()
                 UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            }, failure: {(message) -> Void in
+                let sMessage = MDCSnackbarMessage()
+                sMessage.text = message
+                MDCSnackbarManager.show(sMessage)
             })
         }
         
@@ -60,7 +65,12 @@ class ProfileViewController: UIViewController{
             self.followersLabel.text = String(describing: response.followers!) + " Followers"
             self.postsTableView.reloadData()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        })    }
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
+        })
+    }
 }
 
 extension ProfileViewController: UITableViewDataSource {

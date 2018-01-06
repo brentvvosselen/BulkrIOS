@@ -10,6 +10,12 @@ class Image: Mappable{
         
     }
     
+    init(filename: String, filetype: String, value: String) {
+        self.filename = filename
+        self.filetype = filetype
+        self.value = value
+    }
+    
     func mapping(map: Map) {
         filename <- map["filename"]
         filetype <- map["filetype"]

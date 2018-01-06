@@ -1,4 +1,5 @@
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class PostTableCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
@@ -12,6 +13,7 @@ class PostTableCell: UITableViewCell {
     
     var saved: Bool = false
     var liked: Bool = false
+    var likes: Int = 0
     
     var currentUser: String = "brent.vanvosselen@live.be"
     
@@ -21,6 +23,18 @@ class PostTableCell: UITableViewCell {
             posterLabel.text = post.poster?.email
             descriptionLabel.text = post.description
             
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .long
+            dateFormatter.timeStyle = .medium
+            
+            dateFormatter.locale = Locale(identifier: "en_US")
+            dateLabel.text = dateFormatter.string(from: post.createdAt!)
+            
+            if let like = post.likes{
+                likes = like.count
+            }
+            
+            bulkButton.setTitle("\(likes) BULK" , for: .normal)
             
             //profile picture of poster
             if let picture = post.poster?.picture{
@@ -46,7 +60,7 @@ class PostTableCell: UITableViewCell {
             for user in post.likes! {
                 if user.email == currentUser {
                     liked = true
-                    bulkButton.setTitle("UNBULK", for: .normal)
+                    bulkButton.setTitle("\(likes) UNBULK" , for: .normal)
                 }
             }
             
@@ -66,14 +80,24 @@ class PostTableCell: UITableViewCell {
             //like
             PostService.likePost(post.id!, completion: {(response) -> Void in
                 self.liked = true
-                self.bulkButton.setTitle("UNBULK", for: .normal)
+                self.likes += 1
+                self.bulkButton.setTitle("\(self.likes) UNBULK" , for: .normal)
+            }, failure: {(message) -> Void in
+                let sMessage = MDCSnackbarMessage()
+                sMessage.text = message
+                MDCSnackbarManager.show(sMessage)
             })
             
         }else{
             //unlike
             PostService.unlikePost(post.id!, completion: {(response) -> Void in
                 self.liked = false
-                self.bulkButton.setTitle("BULK", for: .normal)
+                self.likes -= 1
+                self.bulkButton.setTitle("\(self.likes) BULK" , for: .normal)
+            }, failure: {(message) -> Void in
+                let sMessage = MDCSnackbarMessage()
+                sMessage.text = message
+                MDCSnackbarManager.show(sMessage)
             })
         }
     }
@@ -85,6 +109,10 @@ class PostTableCell: UITableViewCell {
                 self.saved = true
                 self.saveButton.setTitle("SAVED", for: .normal)
                 self.saveButton.isEnabled = false
+            }, failure: {(message) -> Void in
+                let sMessage = MDCSnackbarMessage()
+                sMessage.text = message
+                MDCSnackbarManager.show(sMessage)
             })
             
         }

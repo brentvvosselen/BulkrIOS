@@ -1,4 +1,5 @@
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class SavesViewController: UIViewController {
     
@@ -12,6 +13,10 @@ class SavesViewController: UIViewController {
             self.posts = response
             self.savedPostsTableView.reloadData()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
         })
     }
     

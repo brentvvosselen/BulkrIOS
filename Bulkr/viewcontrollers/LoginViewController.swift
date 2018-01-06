@@ -1,4 +1,5 @@
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class LoginViewController: UIViewController {
     
@@ -30,8 +31,8 @@ class LoginViewController: UIViewController {
     }
     
     func isLoggedIn() -> Bool {
-        if let token = UserDefaults.standard.string(forKey: "token"){
-            if let user = UserDefaults.standard.string(forKey: "userMail") {
+        if UserDefaults.standard.string(forKey: "token") != nil{
+            if UserDefaults.standard.string(forKey: "userMail") != nil {
                 return true
             } else {
                 return false
@@ -62,7 +63,15 @@ class LoginViewController: UIViewController {
             print("logged in in screen")
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
             self.performSegue(withIdentifier: "loggedInSegue", sender: self)
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
         })
+    }
+    
+    @IBAction func hideKeyboard(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
 }
 

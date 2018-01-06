@@ -7,7 +7,8 @@ target 'Bulkr' do
 
   # Pods for Bulkr
 	pod 'Alamofire', '~> 4.5'
-	pod 'AlamofireObjectMapper', '~> 5.0'	
+	pod 'AlamofireObjectMapper', '~> 5.0'
+	pod 'MaterialComponents/Snackbar'
 
   target 'BulkrUITests' do
     inherit! :search_paths

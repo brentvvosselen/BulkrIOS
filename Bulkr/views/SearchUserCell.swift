@@ -9,7 +9,9 @@ class SearchUserCell: UITableViewCell {
     var user: User!{
         didSet{
             emailLabel.text = user.email
-            followersLabel.text = String(describing: user.followers!) + " Followers"
+            if let followers = user.followers {
+                followersLabel.text = String(describing: followers) + " Followers"
+            }
             
             //round picture
             userImageView.layer.cornerRadius = 30

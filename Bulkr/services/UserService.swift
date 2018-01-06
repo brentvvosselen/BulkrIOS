@@ -5,7 +5,7 @@ class UserService {
     
     static let prefix: String = "http://127.0.0.1:3000/"
     
-    static func login(as email: String, with password: String, completion: @escaping (_ boolean: Bool) -> Void) {
+    static func login(as email: String, with password: String, completion: @escaping (_ boolean: Bool) -> Void, failure: @escaping(_ error: String) -> Void) {
         let params = [
             "email": email,
             "password": password
@@ -25,12 +25,12 @@ class UserService {
                 completion(true)
             case .failure(let error):
                 print("not logged in")
-                return
+                failure(error.localizedDescription)
             }
         }
     }
     
-    static func register(with email: String, and password: String, completion: @escaping(_ boolean: Bool) -> Void) {
+    static func register(with email: String, and password: String, completion: @escaping(_ boolean: Bool) -> Void, failure: @escaping(_ error: String) -> Void) {
         let params = [
             "email": email,
             "password": password
@@ -50,108 +50,119 @@ class UserService {
                 completion(true)
             case .failure(let error):
                 print("not registered")
-                return
+                failure(error.localizedDescription)
             }
         }
     }
     
-    static func getUserInfo(for email: String, completion: @escaping(_ user: User) -> Void) {
-        Alamofire.request(prefix + "api/user/" + email, method: .get).validate(statusCode: 200..<300).responseJSON {
+    static func getUserInfo(for email: String, completion: @escaping(_ user: User) -> Void, failure: @escaping(_ error: String) -> Void) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
+        ]
+        Alamofire.request(prefix + "api/user/" + email, method: .get, headers: headers).validate(statusCode: 200..<300).responseJSON {
             response in
             switch response.result {
             case .success:
                 //get return value
                 guard let responseJSON = response.result.value as? [String: AnyObject] else {
-                    //set failure
+                    failure("No object found")
                     return
                 }
                 guard let user: User = Mapper<User>().map(JSON: responseJSON) else {
-                    //set failure completion
+                    failure("User not found")
                     return
                 }
                 completion(user)
             case .failure(let error):
-                //set failure
-                return
+                failure(error.localizedDescription)
             }
         }
     }
     
-    static func findUsers(searchString: String, completion: @escaping(_ users: [User]) -> Void) {
-        Alamofire.request(prefix + "api/user/find/" + searchString, method: .get).validate(statusCode:200..<300).responseJSON {
+    static func findUsers(searchString: String, completion: @escaping(_ users: [User]) -> Void, failure: @escaping(_ error: String) -> Void) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
+        ]
+        Alamofire.request(prefix + "api/user/find/" + searchString, method: .get, headers: headers).validate(statusCode:200..<300).responseJSON {
             response in
             switch response.result {
             case .success:
                 //get return value
                 guard let responseJSON = response.result.value as? Array<[String: AnyObject]> else {
-                    //failure completion
+                    failure("No object found")
                     return
                 }
                 guard let users: [User] = Mapper<User>().mapArray(JSONArray: responseJSON) else {
-                    //set failure completion
+                    failure("No users found")
                     return
                 }
                 completion(users)
             case .failure(let error):
-                //set failure
+                failure(error.localizedDescription)
                 return
             }
         }
     }
     
-    static func doesFollow(usermail: String, completion: @escaping(_ follows: Bool) -> Void) {
+    static func doesFollow(usermail: String, completion: @escaping(_ follows: Bool) -> Void, failure: @escaping(_ error: String) -> Void) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
+        ]
         if let user = UserDefaults.standard.string(forKey: "userMail") {
-            Alamofire.request(prefix + "api/user/" + user + "/doesFollow/" + usermail, method: .get).validate(statusCode: 200..<300).responseJSON {
+            Alamofire.request(prefix + "api/user/" + user + "/doesFollow/" + usermail, method: .get, headers: headers).validate(statusCode: 200..<300).responseJSON {
                 response in
                 switch response.result {
                 case .success:
                     if let JSON = response.result.value {
-                        print((JSON as? Bool))
+                        print((JSON as? Bool)!)
                         completion(JSON as! Bool)
                     }else {
-                        //error
+                        failure("No response")
                     }
                 case .failure(let error):
-                    //set failure
-                    return
+                    failure("Error: \(error)" )
                 }
             }
         } else {
-            return
+            failure("No user found")
         }
     }
     
-    static func follow(usermail: String, completion: @escaping(_ boolean: Bool) -> Void) {
+    static func follow(usermail: String, completion: @escaping(_ boolean: Bool) -> Void, failure: @escaping(_ error: String) -> Void) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
+        ]
         if let user = UserDefaults.standard.string(forKey: "userMail") {
-            Alamofire.request(prefix + "api/user/" + user + "/follow/" + usermail, method: .post).validate(statusCode: 200..<300).responseJSON {
+            Alamofire.request(prefix + "api/user/" + user + "/follow/" + usermail, method: .post, headers: headers).validate(statusCode: 200..<300).responseJSON {
                 response in
                 switch response.result {
                 case .success:
                     completion(true)
                 case .failure(let error):
-                    //error
-                    return
+                    failure(error.localizedDescription)
                 }
             }
         } else {
-            return
+            failure("You are not logged in correctly")
         }
     }
     
-    static func unfollow(usermail: String, completion: @escaping(_ boolean: Bool) -> Void) {
+    static func unfollow(usermail: String, completion: @escaping(_ boolean: Bool) -> Void, failure: @escaping(_ error: String) -> Void) {
+        let headers: HTTPHeaders = [
+            "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
+        ]
         if let user = UserDefaults.standard.string(forKey: "userMail") {
-            Alamofire.request(prefix + "api/user/" + user + "/unfollow/" + usermail, method: .put).validate(statusCode: 200..<300).responseJSON {
+            Alamofire.request(prefix + "api/user/" + user + "/unfollow/" + usermail, method: .put, headers: headers).validate(statusCode: 200..<300).responseJSON {
                 response in
                 switch response.result {
                 case .success:
                     completion(true)
                 case .failure(let error):
-                    //error
-                    return
+                    failure(error.localizedDescription)
                 }
             }
         } else {
-            return
+            failure("You are not logged in correctly")
         }
     }
     

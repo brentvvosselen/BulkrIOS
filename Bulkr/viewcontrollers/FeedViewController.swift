@@ -1,4 +1,5 @@
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class FeedViewController: UIViewController {
     @IBOutlet weak var postTableView: UITableView!
@@ -17,12 +18,12 @@ class FeedViewController: UIViewController {
             if response.count < 5 {
                 self.hasmoreposts = false
             }
-            /*self.postCollectionView.dataSource = self
-            self.postCollectionView.delegate = self*/
             self.postTableView.reloadData()
-            
-            print(self.posts)
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
         })
     }
     
@@ -33,11 +34,13 @@ class FeedViewController: UIViewController {
             posts.append(addPostViewController.post!)
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
             PostService.addPost(addPostViewController.post!, completion: {(response) -> Void in
-                    print(response)
-                    UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                //self.postCollectionView.dataSource = self
+                print(response)
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 self.postTableView.reloadData()
-                
+            }, failure: {(message) -> Void in
+                let sMessage = MDCSnackbarMessage()
+                sMessage.text = message
+                MDCSnackbarManager.show(sMessage)
             })
         default:
             fatalError("Unknown segue")
@@ -79,12 +82,14 @@ extension FeedViewController: UITableViewDelegate {
                     if response.count < 5 {
                         self.hasmoreposts = false
                     }
-                    /*self.postCollectionView.dataSource = self
-                     self.postCollectionView.delegate = self*/
                     self.postTableView.reloadData()
                     
                     print(self.posts)
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                }, failure: {(message) -> Void in
+                    let sMessage = MDCSnackbarMessage()
+                    sMessage.text = message
+                    MDCSnackbarManager.show(sMessage)
                 })
             }
             

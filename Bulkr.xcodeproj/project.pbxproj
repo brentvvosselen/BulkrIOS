@@ -34,6 +34,8 @@
 		6C4DE3181FEBD3EE00B6D786 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6C4DE3161FEBD3EE00B6D786 /* LaunchScreen.storyboard */; };
 		6C4DE3231FEBD3EE00B6D786 /* BulkrUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C4DE3221FEBD3EE00B6D786 /* BulkrUITests.swift */; };
 		6C534B831FF3051100E90522 /* SavesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C534B821FF3051100E90522 /* SavesViewController.swift */; };
+		6C86CE721FFFFE9000C255F0 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C86CE711FFFFE9000C255F0 /* UIImageExtension.swift */; };
+		6C86CE7420005BB700C255F0 /* ISODateTransform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C86CE7320005BB700C255F0 /* ISODateTransform.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +79,8 @@
 		6C4DE3221FEBD3EE00B6D786 /* BulkrUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BulkrUITests.swift; sourceTree = "<group>"; };
 		6C4DE3241FEBD3EE00B6D786 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6C534B821FF3051100E90522 /* SavesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavesViewController.swift; sourceTree = "<group>"; };
+		6C86CE711FFFFE9000C255F0 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		6C86CE7320005BB700C255F0 /* ISODateTransform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ISODateTransform.swift; sourceTree = "<group>"; };
 		768F6D9EBF92507C730F9E16 /* Pods-Bulkr.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bulkr.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bulkr/Pods-Bulkr.release.xcconfig"; sourceTree = "<group>"; };
 		99275DD0B755752DEEAB526C /* Pods_Bulkr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bulkr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3D9D608BD173EF0503D4707 /* Pods_BulkrUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BulkrUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -111,6 +115,8 @@
 			isa = PBXGroup;
 			children = (
 				6C140F521FF4191900EBBADE /* TextFieldExtension.swift */,
+				6C86CE711FFFFE9000C255F0 /* UIImageExtension.swift */,
+				6C86CE7320005BB700C255F0 /* ISODateTransform.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -378,12 +384,16 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Bulkr/Pods-Bulkr-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -459,7 +469,9 @@
 				6C140F551FF41D3A00EBBADE /* UserService.swift in Sources */,
 				6C36B4D71FF50F7B00FF4ED2 /* SearchUserCell.swift in Sources */,
 				6C45E6311FEC39D60064A2F0 /* ProfileViewController.swift in Sources */,
+				6C86CE721FFFFE9000C255F0 /* UIImageExtension.swift in Sources */,
 				6C140F4E1FF3E17800EBBADE /* LoginViewController.swift in Sources */,
+				6C86CE7420005BB700C255F0 /* ISODateTransform.swift in Sources */,
 				6C45E6271FEC04300064A2F0 /* PostService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

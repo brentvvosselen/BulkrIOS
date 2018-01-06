@@ -1,4 +1,5 @@
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class OtherProfileViewController: UIViewController {
     
@@ -22,10 +23,18 @@ class OtherProfileViewController: UIViewController {
         case true:
             UserService.unfollow(usermail: (user?.email)!, completion: {(response) -> Void in
                 self.follows = false
+            }, failure: {(message) -> Void in
+                let sMessage = MDCSnackbarMessage()
+                sMessage.text = message
+                MDCSnackbarManager.show(sMessage)
             })
         case false:
             UserService.follow(usermail: (user?.email)!, completion: {(response) -> Void in
                 self.follows = true
+            }, failure: {(message) -> Void in
+                let sMessage = MDCSnackbarMessage()
+                sMessage.text = message
+                MDCSnackbarManager.show(sMessage)
             })
         }
     }
@@ -37,7 +46,7 @@ class OtherProfileViewController: UIViewController {
         followButton.backgroundColor = .clear
         followButton.layer.cornerRadius = 3
         followButton.layer.borderWidth = 2
-        followButton.layer.borderColor = UIColor(red: 205/255, green: 72/255, blue: 61/255, alpha: 1).cgColor
+        followButton.layer.borderColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 1).cgColor
         followButton.contentEdgeInsets = UIEdgeInsetsMake(10,15,10,15)
         
         //get user data
@@ -58,11 +67,19 @@ class OtherProfileViewController: UIViewController {
             
             self.postsTableView.reloadData()
             UIApplication.shared.isNetworkActivityIndicatorVisible = false
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
         })
         
         UserService.doesFollow(usermail: (user?.email)!, completion: {(response) -> Void in
             self.follows = response
             print(response)
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
         })
     }
     

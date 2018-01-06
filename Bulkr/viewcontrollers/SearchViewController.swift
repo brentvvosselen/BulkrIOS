@@ -1,4 +1,5 @@
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class SearchViewController: UIViewController {
     
@@ -18,6 +19,10 @@ class SearchViewController: UIViewController {
             fatalError("Unknown segue")
         }
     }
+    
+    @IBAction func hideKeyboard(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
 }
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -26,6 +31,10 @@ extension SearchViewController: UISearchBarDelegate {
             self.foundUsers = response
             self.foundUsersTable.reloadData()
             UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
         })
     }
 }

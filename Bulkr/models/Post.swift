@@ -30,6 +30,8 @@ class Post: Mappable{
         saves <- map["saves"]
         poster <- map["poster"]
         picture <- map["picture"]
+        createdAt <- (map["createdAt"], ISODateTransform())
+        
     }
 
 

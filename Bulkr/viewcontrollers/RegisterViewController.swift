@@ -1,4 +1,5 @@
 import UIKit
+import MaterialComponents.MaterialSnackbar
 
 class RegisterViewController: UIViewController {
     
@@ -25,6 +26,10 @@ class RegisterViewController: UIViewController {
                 UserService.register(with: email, and: password, completion: {(response) -> Void in
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
                     self.dismiss(animated: true)
+                }, failure: {(message) -> Void in
+                    let sMessage = MDCSnackbarMessage()
+                    sMessage.text = message
+                    MDCSnackbarManager.show(sMessage)
                 })
             } else {
                 print("not a valid email")
@@ -42,6 +47,10 @@ class RegisterViewController: UIViewController {
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
+    }
+    
+    @IBAction func hideKeyboard(_ sender: UITextField) {
+        sender.resignFirstResponder()
     }
 }
 
