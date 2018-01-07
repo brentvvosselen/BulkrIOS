@@ -18,16 +18,13 @@
             <string>HelveticaNeue-Bold</string>
             <string>HelveticaNeue-Medium</string>
         </array>
-        <array key="HelveticaNeueLights.ttc">
-            <string>HelveticaNeue-Thin</string>
-        </array>
     </customFonts>
     <scenes>
         <!--Feed-->
         <scene sceneID="ag7-hi-kxF">
             <objects>
                 <navigationController id="Htl-Qd-JlU" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Feed" image="icons8-news" landscapeImage="icons8-news" largeContentSizeImage="icons8-news" selectedImage="icons8-news" id="oOJ-c7-wxu"/>
+                    <tabBarItem key="tabBarItem" title="Feed" image="ic-news" landscapeImage="ic-news" largeContentSizeImage="ic-news" selectedImage="ic-news" id="oOJ-c7-wxu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7lA-Kf-Yld">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -281,7 +278,7 @@
                                 <rect key="frame" x="0.0" y="172" width="414" height="515"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchUserCell" rowHeight="80" id="ShC-uU-QIK" customClass="SearchUserCell" customModule="Bulkr" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="searchUserCell" rowHeight="80" id="ShC-uU-QIK" customClass="SearchUserCell" customModule="Bulkr" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="414" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ShC-uU-QIK" id="5b6-xb-mu9">
@@ -549,7 +546,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.82352941176470584" green="0.37254901960784315" blue="0.3411764705882353" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                        <color key="backgroundColor" red="0.78103999256878087" green="0.34297631404221485" blue="0.3210307671961089" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
                             <constraint firstItem="0hF-Kh-IQm" firstAttribute="top" secondItem="m01-yz-3Uj" secondAttribute="bottom" constant="8" id="1YD-Jz-jtc"/>
                             <constraint firstItem="Vfg-Qd-rfN" firstAttribute="trailing" secondItem="7Ty-DP-6x5" secondAttribute="trailing" id="3g8-lv-erK"/>
@@ -593,11 +590,11 @@
             </objects>
             <point key="canvasLocation" x="2383" y="-1576"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Saves-->
         <scene sceneID="FKr-Oa-38z">
             <objects>
                 <navigationController id="oeT-Yo-QM0" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" systemItem="favorites" id="7an-Kd-50Y"/>
+                    <tabBarItem key="tabBarItem" title="Saves" image="ic_star" landscapeImage="ic_star" largeContentSizeImage="ic_star" id="7an-Kd-50Y"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XJn-iY-vMS">
                         <rect key="frame" x="0.0" y="20" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1016,7 +1013,7 @@
                                     <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="K7Z-ba-pLf" kind="showDetail" action="showViewController:sender:" id="yXq-sC-ugh"/>
+                                    <segue destination="K7Z-ba-pLf" kind="showDetail" animates="NO" action="showViewController:sender:" id="yXq-sC-ugh"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keE-eX-zz7">
@@ -1214,8 +1211,6 @@
                                 <constraints>
                                     <constraint firstItem="YRN-w3-XCF" firstAttribute="baseline" secondItem="3nH-Ru-klS" secondAttribute="baseline" id="07t-Er-na9"/>
                                     <constraint firstItem="3nH-Ru-klS" firstAttribute="leading" secondItem="eNY-5f-YYU" secondAttribute="leading" constant="30" id="2hc-wO-WSx"/>
-                                    <constraint firstItem="eNY-5f-YYU" firstAttribute="trailing" secondItem="PVp-g8-tbF" secondAttribute="trailing" constant="30" id="5Ac-N8-STB"/>
-                                    <constraint firstItem="eNY-5f-YYU" firstAttribute="trailing" secondItem="1gy-XO-Thk" secondAttribute="trailing" constant="30" id="6Mg-7K-GCT"/>
                                     <constraint firstItem="aKi-1S-bJ1" firstAttribute="top" secondItem="SY1-Wk-CfK" secondAttribute="firstBaseline" id="7E3-e9-xqD"/>
                                     <constraint firstItem="1gy-XO-Thk" firstAttribute="top" secondItem="Njq-MD-9DA" secondAttribute="bottom" constant="4" id="7mB-gj-Im8"/>
                                     <constraint firstItem="q65-Jz-BKd" firstAttribute="baseline" secondItem="YRN-w3-XCF" secondAttribute="baseline" id="AOK-oa-pwj"/>
@@ -1225,7 +1220,10 @@
                                     <constraint firstItem="B0G-e3-Cic" firstAttribute="leading" secondItem="1gy-XO-Thk" secondAttribute="leading" id="Ldn-df-Zox"/>
                                     <constraint firstItem="Njq-MD-9DA" firstAttribute="leading" secondItem="PVp-g8-tbF" secondAttribute="leading" id="S8f-ys-GOR"/>
                                     <constraint firstItem="YRN-w3-XCF" firstAttribute="leading" secondItem="q65-Jz-BKd" secondAttribute="trailing" constant="8" id="SgG-SD-kAU"/>
+                                    <constraint firstItem="PVp-g8-tbF" firstAttribute="trailing" secondItem="e7j-Y7-4tK" secondAttribute="trailing" id="Sho-zj-xyX"/>
                                     <constraint firstItem="Ogg-QR-ecQ" firstAttribute="leading" secondItem="B0G-e3-Cic" secondAttribute="leading" id="UU4-Re-NUt"/>
+                                    <constraint firstItem="1gy-XO-Thk" firstAttribute="trailing" secondItem="e7j-Y7-4tK" secondAttribute="trailing" id="Vhv-wa-Nu9"/>
+                                    <constraint firstItem="Ogg-QR-ecQ" firstAttribute="trailing" secondItem="e7j-Y7-4tK" secondAttribute="trailing" id="coG-hK-IXl"/>
                                     <constraint firstItem="un0-Sv-WZw" firstAttribute="centerX" secondItem="SY1-Wk-CfK" secondAttribute="centerX" id="e6Y-pe-inG"/>
                                     <constraint firstItem="YYI-h6-bRO" firstAttribute="top" secondItem="Ogg-QR-ecQ" secondAttribute="bottom" constant="4" id="eD0-FG-f01"/>
                                     <constraint firstAttribute="bottom" secondItem="aKi-1S-bJ1" secondAttribute="bottom" id="f7d-55-aRb"/>
@@ -1237,7 +1235,6 @@
                                     <constraint firstItem="2cW-kT-fle" firstAttribute="top" secondItem="3nH-Ru-klS" secondAttribute="bottom" constant="16" id="oLv-Gp-hwa"/>
                                     <constraint firstItem="Ogg-QR-ecQ" firstAttribute="top" secondItem="B0G-e3-Cic" secondAttribute="bottom" constant="8" id="oyH-hU-bfK"/>
                                     <constraint firstItem="2cW-kT-fle" firstAttribute="leading" secondItem="3nH-Ru-klS" secondAttribute="leading" id="qWl-BQ-Cw8"/>
-                                    <constraint firstItem="eNY-5f-YYU" firstAttribute="trailing" secondItem="Ogg-QR-ecQ" secondAttribute="trailing" constant="30" id="qX4-9N-bRl"/>
                                     <constraint firstItem="3nH-Ru-klS" firstAttribute="top" secondItem="un0-Sv-WZw" secondAttribute="bottom" constant="8" id="qZu-TY-HRb"/>
                                     <constraint firstItem="B0G-e3-Cic" firstAttribute="top" secondItem="1gy-XO-Thk" secondAttribute="bottom" constant="16" id="qn5-xb-61c"/>
                                     <constraint firstItem="1gy-XO-Thk" firstAttribute="leading" secondItem="Njq-MD-9DA" secondAttribute="leading" id="rL5-iZ-lI0"/>
@@ -1284,21 +1281,21 @@
                                             <constraint firstAttribute="width" constant="70" id="CpM-WS-7sk"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="brent.vanvosselen@live.be" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9l-WB-H81">
-                                        <rect key="frame" x="20" y="86" width="214" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9l-WB-H81">
+                                        <rect key="frame" x="20" y="86" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15 Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2t-SN-b5e">
-                                        <rect key="frame" x="20" y="111" width="100" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2t-SN-b5e">
+                                        <rect key="frame" x="20" y="90" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZn-1J-LJs">
-                                        <rect key="frame" x="323" y="0.0" width="71" height="33"/>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue-Thin" family="Helvetica Neue" pointSize="17"/>
+                                        <rect key="frame" x="318" y="0.0" width="76" height="33"/>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="17"/>
                                         <state key="normal" title="LOG OUT">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
@@ -1512,7 +1509,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="alX-Ug-PK2"/>
                     </view>
-                    <tabBarItem key="tabBarItem" systemItem="contacts" id="et4-nz-LNT"/>
+                    <tabBarItem key="tabBarItem" title="Profile" image="ic_user" landscapeImage="ic_user" largeContentSizeImage="ic_user" selectedImage="ic_user" id="et4-nz-LNT"/>
                     <navigationItem key="navigationItem" title="Profile" id="ZCQ-0y-nHq">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="iPV-rH-0xh">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1556,7 +1553,9 @@
     <resources>
         <image name="bulkr-login-white-new" width="3648" height="5472"/>
         <image name="chevron-enter" width="192" height="322"/>
-        <image name="icons8-news" width="25" height="25"/>
+        <image name="ic-news" width="25" height="25"/>
+        <image name="ic_star" width="27" height="27"/>
+        <image name="ic_user" width="26" height="26"/>
     </resources>
     <color key="tintColor" red="0.80392156859999997" green="0.28235294119999998" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>

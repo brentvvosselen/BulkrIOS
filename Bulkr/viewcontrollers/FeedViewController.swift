@@ -66,7 +66,7 @@ class FeedViewController: UIViewController {
                 self.postTableView.reloadData()
             }, failure: {(message) -> Void in
                 let sMessage = MDCSnackbarMessage()
-                sMessage.text = message
+                sMessage.text = "We could not add your post"
                 MDCSnackbarManager.show(sMessage)
             })
         default:

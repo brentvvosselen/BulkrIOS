@@ -25,17 +25,17 @@ class RegisterViewController: UIViewController {
                 UIApplication.shared.isNetworkActivityIndicatorVisible = true
                 UserService.register(with: email, and: password, completion: {(response) -> Void in
                     UIApplication.shared.isNetworkActivityIndicatorVisible = false
-                    self.dismiss(animated: true)
+                    self.dismiss(animated: false)
                 }, failure: {(message) -> Void in
                     let sMessage = MDCSnackbarMessage()
                     sMessage.text = message
                     MDCSnackbarManager.show(sMessage)
                 })
             } else {
-                print("not a valid email")
+                showAlert(with: "Not a valid email!")
             }
         }else {
-            print("passwords not the same")
+            showAlert(with: "Passwords are not the same!")
         }
     }
     @IBAction func goToLogin(_ sender: Any) {
@@ -47,6 +47,14 @@ class RegisterViewController: UIViewController {
         
         let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
         return emailTest.evaluate(with: email)
+    }
+    
+    func showAlert(with message: String){
+        let alertController = UIAlertController(title: NSLocalizedString("Failed",comment:""), message: NSLocalizedString(message,comment:""), preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title:     NSLocalizedString("Ok", comment: ""), style: .default, handler: { (pAlert) in
+        })
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     @IBAction func hideKeyboard(_ sender: UITextField) {

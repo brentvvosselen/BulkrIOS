@@ -65,7 +65,7 @@ class LoginViewController: UIViewController {
             self.performSegue(withIdentifier: "loggedInSegue", sender: self)
         }, failure: {(message) -> Void in
             let sMessage = MDCSnackbarMessage()
-            sMessage.text = message
+            sMessage.text = "We could not log you in."
             MDCSnackbarManager.show(sMessage)
         })
     }

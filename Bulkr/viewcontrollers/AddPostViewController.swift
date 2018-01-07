@@ -23,11 +23,7 @@ class AddPostViewController: UITableViewController, UIImagePickerControllerDeleg
             imagePicker.allowsEditing = false
             self.present(imagePicker, animated: true, completion: nil)
         } else {
-            let alert = UIAlertView(title: "Oops!",
-                                    message: "We cannot get access to your camera!",
-                                    delegate: nil,
-                                    cancelButtonTitle: "Ok")
-            alert.show()
+            showAlert(with: "We cannot get access to your camera!")
         }
         
     }
@@ -40,11 +36,7 @@ class AddPostViewController: UITableViewController, UIImagePickerControllerDeleg
             imagePicker.allowsEditing = true
             self.present(imagePicker, animated: true, completion: nil)
         } else {
-            let alert = UIAlertView(title: "Oops!",
-                                    message: "We cannot get access to your library!",
-                                    delegate: nil,
-                                    cancelButtonTitle: "Ok")
-            alert.show()
+            showAlert(with: "We cannot get access to your library!")
         }
     }
     
@@ -87,5 +79,12 @@ class AddPostViewController: UITableViewController, UIImagePickerControllerDeleg
         sender.resignFirstResponder()
     }
     
+    func showAlert(with message: String){
+        let alertController = UIAlertController(title: NSLocalizedString("Oops!",comment:""), message: NSLocalizedString("message",comment:""), preferredStyle: .alert)
+        let defaultAction = UIAlertAction(title:     NSLocalizedString("Ok", comment: ""), style: .default, handler: { (pAlert) in
+        })
+        alertController.addAction(defaultAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
    
 }
