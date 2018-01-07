@@ -17,7 +17,7 @@ class AddPostViewController: UITableViewController, UIImagePickerControllerDeleg
     // Source: https://turbofuture.com/cell-phones/Access-Photo-Camera-and-Library-in-Swift
     @IBAction func takePicture() {
         if UIImagePickerController.isSourceTypeAvailable(.camera){
-            var imagePicker = UIImagePickerController()
+            let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .camera
             imagePicker.allowsEditing = false
@@ -30,7 +30,7 @@ class AddPostViewController: UITableViewController, UIImagePickerControllerDeleg
     
     @IBAction func choosePicture() {
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-            var imagePicker = UIImagePickerController()
+            let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
             imagePicker.allowsEditing = true

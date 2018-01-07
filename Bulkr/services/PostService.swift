@@ -63,10 +63,10 @@ class PostService{
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
         ]
-        print(post.picture?.filename)
+        print(post.picture?.filename as Any)
         let params = [
-            "title": post.title,
-            "description": post.description,
+            "title": post.title as Any,
+            "description": post.description as Any,
             (post.picture != nil ? "picture" : ""): [
                 "filename": post.picture?.filename,
                 "filetype": post.picture?.filetype,

@@ -13,6 +13,8 @@ class RegisterViewController: UIViewController {
         emailTextField.setBottomLine(in: linecolor)
         passwordTextField.setBottomLine(in: linecolor)
         passwordConfirmTextField.setBottomLine(in: linecolor)
+        
+
     }
     
     @IBAction func register(_ sender: Any) {
