@@ -8,6 +8,8 @@ class OtherProfileViewController: UIViewController {
     @IBOutlet weak var postsTableView: UITableView!
     @IBOutlet weak var followButton: UIButton!
     
+    var refreshControl: UIRefreshControl!
+    
     var follows: Bool = false{
         didSet{
             switch follows{
@@ -81,6 +83,14 @@ class OtherProfileViewController: UIViewController {
             sMessage.text = message
             MDCSnackbarManager.show(sMessage)
         })
+        
+        
+        //set up refresh control
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        postsTableView.refreshControl = refreshControl
+
     }
     
     var userPosts: [Post] = []
@@ -90,6 +100,33 @@ class OtherProfileViewController: UIViewController {
         }
     }
     
+    @objc func refresh(refreshControl: UIRefreshControl){
+        //get user data
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        UserService.getUserInfo(for: (user?.email)!, completion: {(response) -> Void in
+            self.user = response
+            self.userPosts = response.posts!
+            
+            self.followersLabel.text = String(describing: response.followers!) + " Followers"
+            
+            if let picture = response.picture {
+                let dataDecoded: Data = Data(base64Encoded: picture.value!, options: .ignoreUnknownCharacters)!
+                let pictureDecoded = UIImage(data: dataDecoded)
+                self.profileImageView.image = pictureDecoded
+            }else{
+                self.profileImageView.image = #imageLiteral(resourceName: "noPicture")
+            }
+            
+            self.postsTableView.reloadData()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            refreshControl.endRefreshing()
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
+            refreshControl.endRefreshing()
+        })
+    }
 }
 
 extension OtherProfileViewController: UITableViewDataSource {

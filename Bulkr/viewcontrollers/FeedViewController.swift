@@ -7,8 +7,8 @@ class FeedViewController: UIViewController {
     var posts: [Post] = []
     var page = 0
     var hasmoreposts = true
-    //white statusbar
 
+    var refreshControl: UIRefreshControl!
     
     override func viewDidLoad() {
         print("hello")
@@ -24,6 +24,33 @@ class FeedViewController: UIViewController {
             let sMessage = MDCSnackbarMessage()
             sMessage.text = message
             MDCSnackbarManager.show(sMessage)
+        })
+        
+        //set up refresh control
+        refreshControl = UIRefreshControl()
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.addTarget(self, action: #selector(refresh), for: .valueChanged)
+        postTableView.refreshControl = refreshControl
+    }
+    
+    @objc func refresh(refreshControl: UIRefreshControl){
+        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        self.page = 0
+        PostService.getMyFeed(at: page, completion: {(response) -> Void in
+            self.posts = response
+            if response.count < 5 {
+                self.hasmoreposts = false
+            }else{
+                self.hasmoreposts = true
+            }
+            self.postTableView.reloadData()
+            UIApplication.shared.isNetworkActivityIndicatorVisible = false
+            refreshControl.endRefreshing()
+        }, failure: {(message) -> Void in
+            let sMessage = MDCSnackbarMessage()
+            sMessage.text = message
+            MDCSnackbarManager.show(sMessage)
+            refreshControl.endRefreshing()
         })
     }
     

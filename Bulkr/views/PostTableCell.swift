@@ -13,12 +13,10 @@ class PostTableCell: UITableViewCell {
     
     var saved: Bool = false
     var liked: Bool = false
-    var likes: Int = 0
-    
-    var currentUser: String = "brent.vanvosselen@live.be"
     
     var post: Post!{
         didSet{
+            print("setted")
             titleLabel.text = post.title
             posterLabel.text = post.poster?.email
             descriptionLabel.text = post.description
@@ -32,13 +30,7 @@ class PostTableCell: UITableViewCell {
                 dateLabel.text = dateFormatter.string(from: date)
                 
             }
-            
-            if let like = post.likes{
-                likes = like.count
-            }
-            
-            bulkButton.setTitle("\(likes) BULK" , for: .normal)
-            
+     
             //profile picture of poster
             if let picture = post.poster?.picture{
                 let dataDecoded: Data = Data(base64Encoded: picture.value!, options: .ignoreUnknownCharacters)!
@@ -61,19 +53,27 @@ class PostTableCell: UITableViewCell {
             
             //check if liked
             if let likes = post.likes {
+                print("user not liked")
+                liked = false
+                bulkButton.setTitle("\(likes.count) BULK" , for: .normal)
                 for user in likes {
-                    if user.email == currentUser {
+                    if user.email == UserDefaults.standard.string(forKey: "userMail") {
+                        print("user liked")
                         liked = true
-                        bulkButton.setTitle("\(likes) UNBULK" , for: .normal)
+                        bulkButton.setTitle("\(likes.count) UNBULK" , for: .normal)
                     }
                 }
+            }else{
+                bulkButton.setTitle("\(0) BULK" , for: .normal)
+                liked = false
+                print("setted false")
             }
             
             
             //check if saved
             if let saves = post.saves {
                 for user in saves {
-                    if user.email == currentUser {
+                    if user.email == UserDefaults.standard.string(forKey: "userMail") {
                         saved = true
                         saveButton.setTitle("SAVED", for: .normal)
                         saveButton.isEnabled = false
@@ -85,12 +85,12 @@ class PostTableCell: UITableViewCell {
     }
     @IBAction func bulk(_ sender: Any) {
         print("bulk_click")
+        print(liked)
         if !liked {
             //like
+            print("like")
             PostService.likePost(post.id!, completion: {(response) -> Void in
-                self.liked = true
-                self.likes += 1
-                self.bulkButton.setTitle("\(self.likes) UNBULK" , for: .normal)
+                self.post = response
             }, failure: {(message) -> Void in
                 let sMessage = MDCSnackbarMessage()
                 sMessage.text = message
@@ -99,10 +99,9 @@ class PostTableCell: UITableViewCell {
             
         }else{
             //unlike
+            print("unlike")
             PostService.unlikePost(post.id!, completion: {(response) -> Void in
-                self.liked = false
-                self.likes -= 1
-                self.bulkButton.setTitle("\(self.likes) BULK" , for: .normal)
+                self.post = response
             }, failure: {(message) -> Void in
                 let sMessage = MDCSnackbarMessage()
                 sMessage.text = message
@@ -115,9 +114,7 @@ class PostTableCell: UITableViewCell {
         if !saved {
             //save
             PostService.savePost(post.id!, completion: {(response) -> Void in
-                self.saved = true
-                self.saveButton.setTitle("SAVED", for: .normal)
-                self.saveButton.isEnabled = false
+                self.post = response
             }, failure: {(message) -> Void in
                 let sMessage = MDCSnackbarMessage()
                 sMessage.text = message

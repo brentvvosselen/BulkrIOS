@@ -22,7 +22,6 @@ class PostService{
                     failure("No posts found")
                     return
                 }
-                print(responseJSON)
                 completion(posts)
                 case .failure(let error):
                     failure(error.localizedDescription)
@@ -90,7 +89,7 @@ class PostService{
         }
     }
     
-    static func likePost(_ id: String, completion: @escaping (_ message: String) -> Void, failure: @escaping(_ error: String) -> Void) {
+    static func likePost(_ id: String, completion: @escaping (_ post: Post) -> Void, failure: @escaping(_ error: String) -> Void) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
         ]
@@ -102,7 +101,15 @@ class PostService{
                 response in
                 switch response.result {
                 case .success:
-                    completion("succes")
+                    guard let responseJSON = response.result.value as? [String: AnyObject] else {
+                        failure("no post found")
+                        return
+                    }
+                    guard let post: Post = Mapper<Post>().map(JSON: responseJSON) else {
+                        failure("no post found")
+                        return
+                    }
+                    completion(post)
                 case .failure(let error):
                     failure(error.localizedDescription)
                 }
@@ -112,7 +119,7 @@ class PostService{
         }
     }
     
-    static func unlikePost(_ id: String, completion: @escaping(_ message: String) -> Void, failure: @escaping(_ error: String) -> Void) {
+    static func unlikePost(_ id: String, completion: @escaping(_ post: Post) -> Void, failure: @escaping(_ error: String) -> Void) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
         ]
@@ -124,7 +131,15 @@ class PostService{
                 response in
                 switch response.result {
                 case .success:
-                    completion("succes")
+                    guard let responseJSON = response.result.value as? [String: AnyObject] else {
+                        failure("no post found")
+                        return
+                    }
+                    guard let post: Post = Mapper<Post>().map(JSON: responseJSON) else {
+                        failure("no post found")
+                        return
+                    }
+                    completion(post)
                 case .failure(let error):
                     failure(error.localizedDescription)
                 }
@@ -134,7 +149,7 @@ class PostService{
         }
     }
     
-    static func savePost(_ id: String, completion: @escaping(_ message: String) -> Void, failure: @escaping(_ error: String) -> Void) {
+    static func savePost(_ id: String, completion: @escaping(_ post: Post) -> Void, failure: @escaping(_ error: String) -> Void) {
         let headers: HTTPHeaders = [
             "Authorization": "Bearer " + UserDefaults.standard.string(forKey: "token")!
         ]
@@ -146,7 +161,15 @@ class PostService{
                 response in
                 switch response.result {
                 case .success:
-                    completion("succes")
+                    guard let responseJSON = response.result.value as? [String: AnyObject] else {
+                        failure("no post found")
+                        return
+                    }
+                    guard let post: Post = Mapper<Post>().map(JSON: responseJSON) else {
+                        failure("no post found")
+                        return
+                    }
+                    completion(post)
                 case .failure(let error):
                     failure(error.localizedDescription)
                 }

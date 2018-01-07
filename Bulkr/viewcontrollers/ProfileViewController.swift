@@ -59,17 +59,30 @@ class ProfileViewController: UIViewController{
     
     @objc func refresh(refreshControl: UIRefreshControl){
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
-        UserService.getUserInfo(for: "brent.vanvosselen@live.be", completion: {(response) -> Void in
-            self.setPosts(response.posts!)
-            self.emailLabel.text = response.email
-            self.followersLabel.text = String(describing: response.followers!) + " Followers"
-            self.postsTableView.reloadData()
-            UIApplication.shared.isNetworkActivityIndicatorVisible = false
-        }, failure: {(message) -> Void in
-            let sMessage = MDCSnackbarMessage()
-            sMessage.text = message
-            MDCSnackbarManager.show(sMessage)
-        })
+        if let user = UserDefaults.standard.string(forKey: "userMail") {
+            UserService.getUserInfo(for: user, completion: {(response) -> Void in
+                self.setPosts(response.posts!)
+                self.emailLabel.text = response.email
+                self.followersLabel.text = String(describing: response.followers!) + " Followers"
+                //picture
+                if let picture = response.picture {
+                    let dataDecoded: Data = Data(base64Encoded: picture.value!, options: .ignoreUnknownCharacters)!
+                    let pictureDecoded = UIImage(data: dataDecoded)
+                    self.pictureImageView.image = pictureDecoded
+                } else {
+                    self.pictureImageView.image = #imageLiteral(resourceName: "noPicture")
+                }
+                self.postsTableView.reloadData()
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
+                refreshControl.endRefreshing()
+            }, failure: {(message) -> Void in
+                let sMessage = MDCSnackbarMessage()
+                sMessage.text = message
+                MDCSnackbarManager.show(sMessage)
+                refreshControl.endRefreshing()
+            })
+        }
+        
     }
 }
 
